@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Pozzi Disperdenti</title>
   <meta name="copyright" content="© GeoStru 2019">
-  <meta name="description"
-    content="">
-  <meta name="keywords"
-    content="geoapp, geostru, pozzi disperdenti, pozzi, disperdenti">
+  <meta name="description" content="">
+  <meta name="keywords" content="geoapp, geostru, pozzi disperdenti, pozzi, disperdenti">
   <meta name="robots" content="index,follow">
   <meta name="og:title" content="Classificazione Suoli NTC2018">
-  <meta name="og:description"
-    content="">
+  <meta name="og:description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="shortcut icon" href="./favicon.png">
@@ -25,11 +23,40 @@
 
   <meta name="theme-color" content="#007BFF">
 </head>
+
 <body>
   <!-- #region main container -->
-  <div class="container-fluid"></div>
+  <div class="container-fluid">
+    <!-- #region navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a id="btn-geoapp" href="https://geoapp.geostru.eu/app/" class="btn btn-lg btn-primary" role="button"
+        aria-pressed="true" style="margin-right:10px"><i class="fa fa-arrow-circle-left"></i></a>
+      <a href="https://geostru.eu" target="_blank" class="navbar-brand"><img src="./img/logo.png" alt="Logo" width="100"
+          height="30"></a>
+      <button id="btn-navbar" class="navbar-toggler btn btn-lg btn-primary" type="button" data-toggle="collapse"
+        data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+          class="navbar-toggler-icon"></span></button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <button id="btn-new" type="button" class="btn btn-primary btn-outline-*"><i
+                class="fa fa-file"></i>Nuovo</button>
+            <button id="btn-open" type="button" class="btn btn-primary"><i class="fa fa-folder"></i>Apri</button>
+            <button id="btn-save" type="button" class="btn btn-primary"><i class="fa fa-save"></i>Salva</button>
+            <button id="btn-print" type="button" class="btn btn-primary"><i
+                class="fa fa-file-word"></i>Relazione</button>
+            <button id="btn-help" type="button" class="btn btn-primary"><i
+                class="fa fa-question-circle"></i>Help</button>
+            <input class="hidden" type="file" id="file-input">
+          </ul>
+        </div>
+    </nav>
+    <!-- #endregion -->
+
+  </div>
   <!-- #endregion -->
-  
+
   <!-- #region scripts -->
   <script src="./js/vendor/jquery.min.js"></script>
   <script src="./js/vendor/popper.min.js"></script>
@@ -37,4 +64,5 @@
   <script src="./js/main.js"></script>
   <!-- #endregion -->
 </body>
+
 </html>
