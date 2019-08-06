@@ -97,6 +97,45 @@ export function showFileDialog() {
   })()
 }
 
+function openFile(e) {
+  return (e => {
+    let file = e.target.files[0]
+
+    if (!file) return
+
+    let reader = new FileReader()
+    reader.onload = e => {
+      let contents = e.target.result
+      loadInput(contents)
+    }
+    reader.readAsText(file)
+
+    function loadInput(contents) {
+      let arr = contents.split(';')
+      arr.pop()
+
+      for (let i = 0; i <= 8; i++) {
+        inputs[i].value = arr[i]
+      }
+
+      let n = (arr.length - 1) - 8
+      let p = 9
+      let arr_t = arr.splice(p, n)
+      
+      let t_body = table.querySelector('tbody')
+      t_body.innerHTML = ``
+
+      for (let i = 1, j = 0, k = 1; i <= (arr_t.length / 2) && j <= arr_t.length - 1 && k <= arr_t.length; i++, j += 2, k += 2) {
+        t_body.innerHTML += `<tr class="text-center">
+          <td class="border-right">${i}</td>
+          <td class="border-right" contenteditable="true">${arr_t[j]}</td>
+          <td contenteditable="true">${arr_t[k]}</td>
+        </tr>`
+      }
+    }
+  })(e)
+}
+
 export function saveFile() {
   return (() => {
     btn_save_modal.click()
