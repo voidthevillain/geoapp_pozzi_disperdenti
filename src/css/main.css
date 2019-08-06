@@ -98,19 +98,19 @@
        Author's custom styles
        ========================================================================== */
   
-  body {
+  /* body {
     background: url(../img/background.svg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-  }
+  } */
   
-  /* body {
-    background-image: url(../img/liquid-cheese.svg);
+  body {
+    background-image: url(../img/background.svg);
     background-size: cover, contain;
     background-repeat: no-repeat;
-  } */
+  }
   
   .container-fluid {
     padding: 0;
