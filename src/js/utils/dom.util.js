@@ -2,18 +2,18 @@ import parse from './parse.util'
 
 // Buttons
 export const btn_new = document.querySelector('#btn-new')
-const btn_open = document.querySelector('#btn-open')
-const btn_save = document.querySelector('#btn-save')
-const btn_print = document.querySelector('#btn-print')
-const btn_help = document.querySelector('#btn-help')
+export const btn_open = document.querySelector('#btn-open')
+export const btn_save = document.querySelector('#btn-save')
+export const btn_print = document.querySelector('#btn-print')
+export const btn_help = document.querySelector('#btn-help')
 
-const btn_minus = document.querySelector('#btn-minus')
-const btn_plus = document.querySelector('#btn-plus')
+export const btn_minus = document.querySelector('#btn-minus')
+export const btn_plus = document.querySelector('#btn-plus')
 
-const btn_calculate = document.querySelector('#btn-calculate')
+export const btn_calculate = document.querySelector('#btn-calculate')
 
 // File
-const input_file = document.querySelector('#input-file')
+const input_file = document.querySelector('#file-input')
 
 // Inputs
 const input_k = document.querySelector('#k')
@@ -83,5 +83,15 @@ export function newFile() {
     }
 
     output_hwmax.value = ''
+  })()
+}
+
+export function showFileDialog() {
+  return (() => {
+    input_file.click()
+
+    input_file.onchange = e => {
+      openFile(e)
+    }
   })()
 }
