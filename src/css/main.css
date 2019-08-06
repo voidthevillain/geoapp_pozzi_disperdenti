@@ -152,7 +152,8 @@
     padding: .5rem 1rem;
   }
   
-  .card-body-input {
+  .card-body-input,
+  .card-body-output {
     display: grid;
     grid-template-rows: auto;
     grid-template-columns: 7fr 0fr 1.5fr 0.2fr;
