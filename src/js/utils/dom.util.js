@@ -98,16 +98,21 @@ export function showFileDialog() {
 
 export function addRow() {
   return (() => {
-    let rows = table.rows[table.rows.length - 1].cells[0].innerText
-    rows++
+    let rows = parse(table.rows[table.rows.length - 1].cells[0].innerText)
 
     let t_body = table.querySelector('tbody')
     t_body.appendChild(document.createElement('tr'))
     t_body.lastChild.classList.add('text-center')
-    t_body.lastChild.innerHTML = `<td class="border-right">${rows}</td><td class="border-right" contenteditable="true"></td><td contenteditable="true"></td>`
+    t_body.lastChild.innerHTML = `<td class="border-right">${rows + 1}</td><td class="border-right" contenteditable="true"></td><td contenteditable="true"></td>`
   })()
 }
 
 export function removeRow() {
+  return (() => {
+    let rows = parse(table.rows[table.rows.length - 1].cells[0].innerText)
 
+    if (rows >= 2) {
+      table.rows[table.rows.length - 1].remove()
+    }
+  })()
 }
