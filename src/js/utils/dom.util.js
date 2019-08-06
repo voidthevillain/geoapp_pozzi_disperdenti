@@ -1,4 +1,5 @@
 import parse from './parse.util'
+import { saveAs } from 'file-saver'
 
 // Buttons
 export const btn_new = document.querySelector('#btn-new')
@@ -92,6 +93,49 @@ export function showFileDialog() {
 
     input_file.onchange = e => {
       openFile(e)
+    }
+  })()
+}
+
+export function saveFile() {
+  return (() => {
+    btn_save_modal.click()
+
+    btn_close_save_modal.onclick = () => {
+      return
+    }
+
+    btn_ext_txt.onclick = () => {
+      file_ext.innerHTML = '.txt'
+    }
+
+    btn_ext_gap.onclick = () => {
+      file_ext.innerHTML = '.gap'
+    }
+
+    btn_confirm_save_modal.onclick = () => {
+      let fileName = file_name.value
+      let fileExt = file_ext.innerHTML
+
+      let str = ''
+
+      if (fileName === '') {
+        file_name.focus()
+      } else {
+        inputs.forEach(e => {
+          str += e.value + ';'
+        })
+        
+        for (let i = 1; i < table.rows.length; i++) {
+          str += table.rows[i].cells[1].innerText + ';'
+          str += table.rows[i].cells[2].innerText + ';'
+        }
+      }
+
+      let blob = new Blob([str], {
+        type: 'text/plain; charset=utf-8'
+      })
+      saveAs(blob, fileName + fileExt)
     }
   })()
 }
