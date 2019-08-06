@@ -198,14 +198,15 @@
           <!-- #endregion -->
 
           <!-- #region calculate button -->
-          <button id="btn-calculate" type="button" class="btn btn-primary" style="margin:0"><i class="fa fa-calculator"></i>Calcola</button>
+          <button id="btn-calculate" type="button" class="btn btn-primary" style="margin:0"><i
+              class="fa fa-calculator"></i>Calcola</button>
           <!-- #endregion -->
 
           <!-- #endregion -->
         </div>
       </div>
       <!-- #endregion -->
-      
+
       <!-- #region output card -->
       <div class="card card-output mt-4">
         <div class="card-header card-header-output">Risultati</div>
@@ -220,6 +221,86 @@
     </div>
     <!-- #endregion -->
   </div>
+
+  <!-- #region modals -->
+  <!-- #region save modal -->
+  <!-- button trigger modal -->
+  <button id="btn-save-modal" type="button" class="btn btn-primary hidden" data-toggle="modal"
+    data-target="#saveFileModal">
+
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="saveFileModal" tabindex="-1" role="dialog" aria-labelledby="saveFileModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="saveFileModalLabel"><i class="fa fa-save text-primary"></i>Salva file
+          </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <input id="file-name" type="text" class="form-control" placeholder="Inserisci il nome del file"
+              aria-label="File name" aria-describedby="file-ext">
+            <div class="input-group-append">
+              <span class="input-group-text bg-primary text-white font-weight-bold" id="file-ext"
+                style="border-color:#007BFF">.txt</span>
+              <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split w-100"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <div class="dropdown-menu">
+                <button id="btn-ext-txt" class="dropdown-item" type="button">.txt</button>
+                <button id="btn-ext-gap" class="dropdown-item" type="button">.gap</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="btn-close-save-modal" type="button" class="btn btn-secondary" data-dismiss="modal"
+            data-toggle="tooltip" data-placement="left" title="Non effettuerà il salvataggio">Esci</button>
+          <button id="btn-confirm-save-modal" type="button" class="btn btn-primary">Salva</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+  <!-- #endregion -->
+
+  <!-- #region alert modal -->
+  <!-- button trigger modal -->
+  <button id="btn-toggle-alert" type="button" class="btn btn-primary hidden" data-toggle="modal"
+    data-target="#inputCheckModal"></button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="inputCheckModal" tabindex="-1" role="dialog" aria-labelledby="inputCheckModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="inputCheckModalLabel">Attenzione</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div id="alert-modal-body" class="modal-body">
+          Prego completare il campo <strong>Profondità piano di posa</strong> con un valore valido.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" data-toggle="tooltip"
+            data-placement="left" title="Non effettuerà il calcolo">Esci</button>
+          <button id="btn-go-to-field" type="button" class="btn btn-primary" data-dismiss="modal">Vai al
+            campo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- #endregion -->
+
   <!-- #endregion -->
 
   <!-- #region scripts -->
