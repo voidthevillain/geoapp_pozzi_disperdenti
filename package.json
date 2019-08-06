@@ -1,0 +1,52 @@
+{
+  "name": "geoapp_pozzi_disperdenti",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Geoapp - Pozzi Disperdenti",
+  "main": "./js/main.js",
+  "scripts": {
+    "start": "webpack",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voidthevillain/geoapp_pozzi_disperdenti.git"
+  },
+  "keywords": [
+    "geostru",
+    "geoapp",
+    "pozzi",
+    "disperdenti",
+    "pozzi",
+    "disperdenti"
+  ],
+  "author": "Mihai Filip (GeoStru)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/voidthevillain/geoapp_pozzi_disperdenti/issues"
+  },
+  "homepage": "https://github.com/voidthevillain/geoapp_pozzi_disperdenti#readme",
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.1.0",
+    "expose-loader": "^0.7.5",
+    "file-loader": "^4.1.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2",
+    "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "bootstrap": "^4.3.1",
+    "docx": "^5.0.0-rc4",
+    "file-saver": "^2.0.2",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0"
+  }
+}
