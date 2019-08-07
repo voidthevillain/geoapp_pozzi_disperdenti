@@ -71,6 +71,8 @@ function initData() {
     T.push(table.rows[i].cells[1].innerText)
     Qp.push(table.rows[i].cells[2].innerText)
   }
+
+  hwmax = -10000
 }
 
 // Event handlers
@@ -197,5 +199,61 @@ export function removeRow() {
     if (rows >= 2) {
       table.rows[table.rows.length - 1].remove()
     }
+  })()
+}
+
+export function calculate() {
+  return (() => {
+    initData()
+
+    let Af        // Area efficace di drenaggio
+    let Ap        // Area effettiva pozzetto
+    let Dw1
+    let Qf = []   // ???
+    let DW = []
+    let hw = []   // ???
+
+    let qc        // ???
+    let n         // ???
+
+    (function(As, phi, tc, DP, DT, a) {
+      qc = As * phi * a * Math.pow(tc, n - 1)   // portata critica
+
+      n = DP / DT
+
+      T.length = n
+      Qp.length = n
+
+      for (let i = 1; i < n; i++) {
+        T[i] += DT
+        
+        if (T[i] < tc) {
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, 1 - t[i] / tc)
+        } else {
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, -(t[i] / tc - 1))
+        }
+      }
+
+      Ap = N * Math.PI * Math.pow(D, 2 / 4)
+
+      for (let i = 1; i < T.length; i++) {
+        Af = Math.PI / 4 * (Math.pow((D + hw[i - 1]), 2) - Math.pow(D, 2))
+        Qf[i] = 3600 * K * Af
+
+        if (i == 1) {
+          Dw1 = ((Qp[i - 1] + Qp[i]) - (Qf[i - 1] + Qf[i])) * (T[i] - T[i - 1])
+        } else {
+          Dw1 = 0.5 * ((Qp[i - 1] + Qp[i]) - (Qf[i - 1] + Qf[i])) * (T[i] - T[i - 1])
+        }
+
+        DW[i] = DW[i - 1] + Dw1
+        hw[i] = DW[i] / Ap
+
+        if (hw[i] > hwmax) {
+          hwmax = hw[i]
+        }
+      }
+
+    })(As, phi, tc, DP, DT, a)
   })()
 }
