@@ -257,6 +257,6 @@ export function calculate() {
       }
     })(As, phi, tc, DP, DT, a)
 
-    document.querySelector('#hwmax').value = hwmax
+    output_hwmax.value = hwmax
   })()
 }
