@@ -19,13 +19,14 @@ const input_file = document.querySelector('#file-input')
 // Inputs
 const input_k = document.querySelector('#k')
 const input_d = document.querySelector('#d')
-const input_n = document.querySelector('#n')
+const input_np = document.querySelector('#np')
 const input_as = document.querySelector('#as')
 const input_phi = document.querySelector('#phi')
 const input_tc = document.querySelector('#tc')
 const input_dp = document.querySelector('#dp')
 const input_dt = document.querySelector('#dt')
 const input_a = document.querySelector('#a')
+const input_n = document.querySelector('#n')
 
 const inputs = document.querySelectorAll('.input-value')
 
@@ -51,7 +52,7 @@ const btn_go_to_field = document.querySelector('#btn-go-to-field')
 const alert_body = document.querySelector('#alert-modal-body')
 
 // Data
-export let K, D, N, As, phi, tc, DP, DT, a
+export let K, D, Np, As, phi, tc, DP, DT, a, n
 export let T = []
 export let Qp = []
 export let hwmax
@@ -59,13 +60,14 @@ export let hwmax
 function initData() {
   K = parse(input_k.value)
   D = parse(input_d.value)
-  N = parse(input_n.value)
+  Np = parse(input_np.value)
   As = parse(input_as.value)
   phi = parse(input_phi.value)
   tc = parse(input_tc.value)
   DP = parse(input_dp.value)
   DT = parse(input_dt.value)
   a = parse(input_a.value)
+  n = parse(input_n.value)
 
   for (let i = 1; i < table.rows.length; i++) {
     T.push(table.rows[i].cells[1].innerText)
@@ -116,12 +118,12 @@ function openFile(e) {
       let arr = contents.split(';')
       arr.pop()
 
-      for (let i = 0; i <= 8; i++) {
+      for (let i = 0; i <= 9; i++) {
         inputs[i].value = arr[i]
       }
 
-      let n = (arr.length - 1) - 8
-      let p = 9
+      let n = (arr.length - 1) - 9
+      let p = 10
       let arr_t = arr.splice(p, n)
       
       let t_body = table.querySelector('tbody')
@@ -228,9 +230,9 @@ export function calculate() {
         T[i] += DT
         
         if (T[i] < tc) {
-          Qp[i] = qc * T[i] / tc * Math.pow(2.71, 1 - t[i] / tc)
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, 1 - T[i] / tc)
         } else {
-          Qp[i] = qc * T[i] / tc * Math.pow(2.71, -(t[i] / tc - 1))
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, -(T[i] / tc - 1))
         }
       }
 
