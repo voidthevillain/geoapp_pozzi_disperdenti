@@ -236,7 +236,7 @@ export function calculate() {
         }
       }
 
-      Ap = N * Math.PI * Math.pow(D, 2 / 4)
+      Ap = Np * Math.PI * Math.pow(D, 2 / 4)
 
       for (let i = 1; i < T.length; i++) {
         Af = Math.PI / 4 * (Math.pow((D + hw[i - 1]), 2) - Math.pow(D, 2))
@@ -255,7 +255,8 @@ export function calculate() {
           hwmax = hw[i]
         }
       }
-
     })(As, phi, tc, DP, DT, a)
+
+    document.querySelector('#hwmax').value = hwmax
   })()
 }
