@@ -70,8 +70,8 @@ function initData() {
   n = parse(input_n.value)
 
   for (let i = 1; i < table.rows.length; i++) {
-    T.push(table.rows[i].cells[1].innerText)
-    Qp.push(table.rows[i].cells[2].innerText)
+    T.push(parse(table.rows[i].cells[1].innerText))
+    Qp.push(parse(table.rows[i].cells[2].innerText))
   }
 
   hwmax = -10000
