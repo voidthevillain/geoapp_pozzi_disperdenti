@@ -219,7 +219,11 @@ export function calculate() {
     let n         // ???
 
     (function(As, phi, tc, DP, DT, a) {
-      qc = As * phi * a * Math.pow(tc, n - 1)   // portata critica
+      Qf[0] = 0
+      DW[0] = 0
+      hw[0] = 0
+
+      // qc = As * phi * a * Math.pow(tc, n - 1)   // portata critica  --> viene NaN ???
 
       n = DP / DT
 
@@ -230,9 +234,9 @@ export function calculate() {
         T[i] += DT
         
         if (T[i] < tc) {
-          Qp[i] = qc * T[i] / tc * Math.pow(2.71, 1 - T[i] / tc)
+          Qp[i] = (As * phi * a * Math.pow(tc, n - 1)) * T[i] / tc * Math.pow(2.71, 1 - T[i] / tc)   // qc = As * phi * a * Math.pow(tc, n - 1)
         } else {
-          Qp[i] = qc * T[i] / tc * Math.pow(2.71, -(T[i] / tc - 1))
+          Qp[i] = (As * phi * a * Math.pow(tc, n - 1)) * T[i] / tc * Math.pow(2.71, -(T[i] / tc - 1))  // qc = As * phi * a * Math.pow(tc, n - 1)
         }
       }
 
@@ -257,6 +261,6 @@ export function calculate() {
       }
     })(As, phi, tc, DP, DT, a)
 
-    output_hwmax.value = hwmax
+    output_hwmax.value = hwmax.toFixed(2)
   })()
 }
