@@ -81,22 +81,22 @@
 
           <span class="span-parameter">Numero pozzetti</span>
           <span class="span-symbol">N</span>
-          <input type="text" id="np" class="input-value form-control text-center" value="2">
+          <input type="text" id="np" class="input-value form-control text-center" value="1">
           <span class="span-unit"></span>
 
           <span class="span-parameter">Area bacino</span>
           <span class="span-symbol">As</span>
-          <input type="text" id="as" class="input-value form-control text-center" value="1.1">
+          <input type="text" id="as" class="input-value form-control text-center" value="1000">
           <span class="span-unit">m<sup>2</sup></span>
 
           <span class="span-parameter">Coefficiente di deflusso</span>
           <span class="span-symbol">φ</span>
-          <input type="text" id="phi" class="input-value form-control text-center" value="0.9">
+          <input type="text" id="phi" class="input-value form-control text-center" value="0.75">
           <span class="span-unit">°</span>
 
           <span class="span-parameter">Tempo di corrivazione</span>
           <span class="span-symbol">tc</span>
-          <input type="text" id="tc" class="input-value form-control text-center" value="3">
+          <input type="text" id="tc" class="input-value form-control text-center" value="0.40">
           <span class="span-unit">h</span>
 
           <span class="span-parameter">Durata pioggia</span>
@@ -109,14 +109,14 @@
           <input type="text" id="dt" class="input-value form-control text-center" value="0.1">
           <span class="span-unit">h</span>
 
-          <span class="span-parameter">Legge di pioggia A</span>
+          <span class="span-parameter">Legge di pioggia h = axt<sup>n</sup></span>
           <span class="span-symbol">a</span>
-          <input type="text" id="a" class="input-value form-control text-center" value="1">
+          <input type="text" id="a" class="input-value form-control text-center" value="32">
           <span class="span-unit">mm/h</span>
 
-          <span class="span-parameter">Legge di pioggia N</span>
+          <span class="span-parameter">Legge di pioggia h = axt<sup>n</sup></span>
           <span class="span-symbol">n</span>
-          <input type="text" id="n" class="input-value form-control text-center" value="1">
+          <input type="text" id="n" class="input-value form-control text-center" value="0.55">
           <span class="span-unit">mm/h</span>
 
           <!-- <span class="span-parameter" style="border-bottom:none">Calcolo automatico dell'idrogramma di piena</span>
@@ -129,8 +129,8 @@
           <table id="table" class="table table-hover bg-light">
             <thead class="thead bg-primary text-white">
               <th class="border-top-0 rounded-left align-middle text-center" scope="col"></th>
-              <th class="border-top-0 align-middle text-center" scope="col">Tempo</th>
-              <th class="border-top-0 rounded-right align-middle text-center" scope="col">Portata</th>
+              <th class="border-top-0 align-middle text-center" scope="col">Tempo<br>[h]</th>
+              <th class="border-top-0 rounded-right align-middle text-center" scope="col">Portata<br>[m<sup>3</sup>/h]</th>
             </thead>
             <tbody>
               <tr class="text-center">
