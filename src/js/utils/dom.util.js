@@ -1,5 +1,6 @@
 import parse from './parse.util'
 import { saveAs } from 'file-saver'
+import { createDocument } from './print.util'
 
 // Buttons
 export const btn_new = document.querySelector('#btn-new')
@@ -69,6 +70,10 @@ function initData() {
   a = parse(input_a.value)
   n = parse(input_n.value)
 
+  T = []
+  Qp = []
+  T.push(0)
+  Qp.push(0)
   for (let i = 1; i < table.rows.length; i++) {
     T.push(parse(table.rows[i].cells[1].innerText))
     Qp.push(parse(table.rows[i].cells[2].innerText))
@@ -211,36 +216,19 @@ export function calculate() {
     let Af        // Area efficace di drenaggio
     let Ap        // Area effettiva pozzetto
     let Dw1
-    let Qf = []   // ???
+    let Qf = []   
     let DW = []
-    let hw = []   // ???
+    let hw = []   
 
-    let qc        // ???
-    let n         // ???
+    let qc        
+    let n         
 
     (function(As, phi, tc, DP, DT, a) {
       Qf[0] = 0
       DW[0] = 0
       hw[0] = 0
 
-      // qc = As * phi * a * Math.pow(tc, n - 1)   // portata critica  --> viene NaN ???
-
-      n = DP / DT
-
-      T.length = n
-      Qp.length = n
-
-      for (let i = 1; i < n; i++) {
-        T[i] += DT
-        
-        if (T[i] < tc) {
-          Qp[i] = (As * phi * a * Math.pow(tc, n - 1)) * T[i] / tc * Math.pow(2.71, 1 - T[i] / tc)   // qc = As * phi * a * Math.pow(tc, n - 1)
-        } else {
-          Qp[i] = (As * phi * a * Math.pow(tc, n - 1)) * T[i] / tc * Math.pow(2.71, -(T[i] / tc - 1))  // qc = As * phi * a * Math.pow(tc, n - 1)
-        }
-      }
-
-      Ap = Np * Math.PI * Math.pow(D, 2 / 4)
+      Ap = Np * Math.PI * Math.pow(D, 2) / 4
 
       for (let i = 1; i < T.length; i++) {
         Af = Math.PI / 4 * (Math.pow((D + hw[i - 1]), 2) - Math.pow(D, 2))
@@ -259,8 +247,15 @@ export function calculate() {
           hwmax = hw[i]
         }
       }
+
     })(As, phi, tc, DP, DT, a)
 
     output_hwmax.value = hwmax.toFixed(2)
+  })()
+}
+
+export function printFile() {
+  return (() => {
+    createDocument()
   })()
 }
