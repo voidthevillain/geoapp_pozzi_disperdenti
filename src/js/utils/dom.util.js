@@ -197,11 +197,17 @@ export function checkSwitch() {
   return (() => {
     if (btn_switch.hasAttribute('checked')) {
       btn_switch.removeAttribute('checked')
-      isAutomatic = btn_switch.hasAttribute('checked') ? true : false
+      isAutomatic = btn_switch.hasAttribute('checked') ? true : fals
     } else {
       btn_switch.setAttribute('checked', '')
       isAutomatic = btn_switch.hasAttribute('checked') ? true : false
       btn_switch.setAttribute('disabled', '')
+      input_as.setAttribute('disabled', '')
+      input_phi.setAttribute('disabled', '')
+      input_tc.setAttribute('disabled', '')
+      input_dp.setAttribute('disabled', '')
+      input_a.setAttribute('disabled', '')
+      input_n.setAttribute('disabled', '')
       refillTable()
     }
   })()
