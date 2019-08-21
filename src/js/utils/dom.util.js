@@ -9,6 +9,8 @@ export const btn_save = document.querySelector('#btn-save')
 export const btn_print = document.querySelector('#btn-print')
 export const btn_help = document.querySelector('#btn-help')
 
+export const btn_switch = document.querySelector('#switch')
+
 export const btn_minus = document.querySelector('#btn-minus')
 export const btn_plus = document.querySelector('#btn-plus')
 
@@ -184,6 +186,16 @@ export function saveFile() {
         type: 'text/plain; charset=utf-8'
       })
       saveAs(blob, fileName + fileExt)
+    }
+  })()
+}
+
+export function checkSwitch() {
+  return (() => {
+    if (btn_switch.hasAttribute('checked')) {
+      btn_switch.removeAttribute('checked')
+    } else {
+      btn_switch.setAttribute('checked', '')
     }
   })()
 }
