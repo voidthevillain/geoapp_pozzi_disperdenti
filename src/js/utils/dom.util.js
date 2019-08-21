@@ -1,6 +1,7 @@
 import parse from './parse.util'
 import { saveAs } from 'file-saver'
 import { createDocument } from './print.util'
+import { rad } from './ang.util'
 
 // Buttons
 export const btn_new = document.querySelector('#btn-new')
@@ -60,6 +61,9 @@ export let T = []
 export let Qp = []
 export let hwmax
 
+// Switch
+export let isAutomatic = false
+
 function initData() {
   K = parse(input_k.value)
   D = parse(input_d.value)
@@ -77,8 +81,8 @@ function initData() {
   T.push(0)
   Qp.push(0)
   for (let i = 1; i < table.rows.length; i++) {
-    T.push(parse(table.rows[i].cells[1].innerText))
-    Qp.push(parse(table.rows[i].cells[2].innerText))
+    T.push(parse(table.rows[i].cells[0].innerText))
+    Qp.push(parse(table.rows[i].cells[1].innerText))
   }
 
   hwmax = -10000
@@ -90,8 +94,8 @@ export function newFile() {
     inputs.forEach(e => e.value = '')
 
     for (let i = 1; i < table.rows.length; i++) {
+      table.rows[i].cells[0].innerText = '-'
       table.rows[i].cells[1].innerText = '-'
-      table.rows[i].cells[2].innerText = '-'
     }
 
     output_hwmax.value = ''
@@ -138,7 +142,6 @@ function openFile(e) {
 
       for (let i = 1, j = 0, k = 1; i <= (arr_t.length / 2) && j <= arr_t.length - 1 && k <= arr_t.length; i++, j += 2, k += 2) {
         t_body.innerHTML += `<tr class="text-center">
-          <td class="border-right">${i}</td>
           <td class="border-right" contenteditable="true">${arr_t[j]}</td>
           <td contenteditable="true">${arr_t[k]}</td>
         </tr>`
@@ -177,8 +180,8 @@ export function saveFile() {
         })
         
         for (let i = 1; i < table.rows.length; i++) {
+          str += table.rows[i].cells[0].innerText + ';'
           str += table.rows[i].cells[1].innerText + ';'
-          str += table.rows[i].cells[2].innerText + ';'
         }
       }
 
@@ -194,29 +197,31 @@ export function checkSwitch() {
   return (() => {
     if (btn_switch.hasAttribute('checked')) {
       btn_switch.removeAttribute('checked')
+      isAutomatic = btn_switch.hasAttribute('checked') ? true : false
     } else {
       btn_switch.setAttribute('checked', '')
+      isAutomatic = btn_switch.hasAttribute('checked') ? true : false
+      btn_switch.setAttribute('disabled', '')
+      refillTable()
     }
   })()
 }
 
 export function addRow() {
   return (() => {
-    let rows = parse(table.rows[table.rows.length - 1].cells[0].innerText)
-
-    let t_body = table.querySelector('tbody')
+     let t_body = table.querySelector('tbody')
     t_body.appendChild(document.createElement('tr'))
     t_body.lastChild.classList.add('text-center')
-    t_body.lastChild.innerHTML = `<td class="border-right">${rows + 1}</td><td class="border-right" contenteditable="true"></td><td contenteditable="true"></td>`
+    t_body.lastChild.innerHTML = `<td class="border-right" contenteditable="true"></td><td contenteditable="true"></td>`
   })()
 }
 
 export function removeRow() {
   return (() => {
-    let rows = parse(table.rows[table.rows.length - 1].cells[0].innerText)
+    let rows = parse(table.rows.length - 1)
 
     if (rows >= 2) {
-      table.rows[table.rows.length - 1].remove()
+      table.rows[rows].remove()
     }
   })()
 }
@@ -232,8 +237,27 @@ export function calculate() {
     let DW = []
     let hw = []   
 
-    let qc        
-    let n         
+    let qc
+    // let n
+
+    if (isAutomatic) {
+      initData()
+      qc = As * rad(phi) * a * Math.pow(tc, n - 1)
+      n = DP / DT
+
+      T.length = n + 1    // +1 per lo zero in prima posizione
+      Qp.length = n + 1
+
+      for (let i = 1; i < n + 1; i++) {
+        T[i] = T[i] + DT
+
+        if (T[i] < tc) {
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, (1 - T[i] / tc))
+        } else {
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, -(T[i] / tc - 1))
+        }
+      }
+    }
 
     (function(As, phi, tc, DP, DT, a) {
       Qf[0] = 0
@@ -270,4 +294,44 @@ export function printFile() {
   return (() => {
     createDocument()
   })()
+}
+
+function refillTable() {
+    initData()
+
+    let Af        // Area efficace di drenaggio
+    let Ap        // Area effettiva pozzetto
+    let Dw1
+    let Qf = []   
+    let DW = []
+    let hw = []   
+
+    let qc
+
+    if (isAutomatic) {
+      qc = As * rad(phi) * a * Math.pow(tc, n - 1)
+      n = DP / DT
+
+      T.length = n + 1    // +1 per lo zero in prima posizione
+      Qp.length = n + 1
+
+      for (let i = 1; i < n + 1; i++) {
+        T[i] = T[i] + DT
+
+        if (T[i] < tc) {
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, (1 - T[i] / tc))
+        } else {
+          Qp[i] = qc * T[i] / tc * Math.pow(2.71, -(T[i] / tc - 1))
+        }
+      }
+    }
+
+    table.querySelector('tbody').innerHTML = ''
+
+    for (let i = 1; i < n + 1; i++) {
+      table.querySelector('tbody').innerHTML += `<tr class="text-center">
+        <td class="border-right" contenteditable="true">${T[i].toFixed(2)}</td>
+        <td contenteditable="true">${Qp[i].toFixed(2)}</td>
+      </tr>`
+    }
 }
