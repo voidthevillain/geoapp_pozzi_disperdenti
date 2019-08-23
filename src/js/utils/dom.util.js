@@ -21,16 +21,16 @@ export const btn_calculate = document.querySelector('#btn-calculate')
 const input_file = document.querySelector('#file-input')
 
 // Inputs
-const input_k = document.querySelector('#k')
-const input_d = document.querySelector('#d')
-const input_np = document.querySelector('#np')
-const input_as = document.querySelector('#as')
-const input_phi = document.querySelector('#phi')
-const input_tc = document.querySelector('#tc')
-const input_dp = document.querySelector('#dp')
-const input_dt = document.querySelector('#dt')
-const input_a = document.querySelector('#a')
-const input_n = document.querySelector('#n')
+export const input_k = document.querySelector('#k')
+export const input_d = document.querySelector('#d')
+export const input_np = document.querySelector('#np')
+export const input_as = document.querySelector('#as')
+export const input_phi = document.querySelector('#phi')
+export const input_tc = document.querySelector('#tc')
+export const input_dp = document.querySelector('#dp')
+export const input_dt = document.querySelector('#dt')
+export const input_a = document.querySelector('#a')
+export const input_n = document.querySelector('#n')
 
 const inputs = document.querySelectorAll('.input-value')
 
@@ -38,7 +38,7 @@ const inputs = document.querySelectorAll('.input-value')
 const output_hwmax = document.querySelector('#hwmax')
 
 // Table
-const table = document.querySelector('#table')
+export const table = document.querySelector('#table')
 
 // Modals
 // Save
