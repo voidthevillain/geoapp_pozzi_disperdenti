@@ -208,6 +208,8 @@ export function checkSwitch() {
       input_dp.setAttribute('disabled', '')
       input_a.setAttribute('disabled', '')
       input_n.setAttribute('disabled', '')
+      btn_plus.setAttribute('disabled', '')
+      btn_minus.setAttribute('disabled', '')
       refillTable()
     }
   })()
@@ -336,8 +338,8 @@ function refillTable() {
 
     for (let i = 1; i < n + 1; i++) {
       table.querySelector('tbody').innerHTML += `<tr class="text-center">
-        <td class="border-right" contenteditable="true">${T[i].toFixed(2)}</td>
-        <td contenteditable="true">${Qp[i].toFixed(2)}</td>
+        <td class="border-right">${T[i].toFixed(2)}</td>
+        <td>${Qp[i].toFixed(2)}</td>
       </tr>`
     }
 }
