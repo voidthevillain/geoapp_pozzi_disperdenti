@@ -250,14 +250,18 @@ export function calculate() {
 
     if (isAutomatic) {
       initData()
-      qc = As * rad(phi) * a * Math.pow(tc, n - 1)
+      qc = As * phi * a * Math.pow(tc, n - 1) / 1000
       n = DP / DT
 
       T.length = n + 1    // +1 per lo zero in prima posizione
       Qp.length = n + 1
 
+      for (let i = 0; i < T.length; i++) {
+        T[i] = 0
+      }
+
       for (let i = 1; i < n + 1; i++) {
-        T[i] = T[i] + DT
+        T[i] = T[i - 1] + DT
 
         if (T[i] < tc) {
           Qp[i] = qc * T[i] / tc * Math.pow(2.71, (1 - T[i] / tc))
@@ -317,14 +321,18 @@ function refillTable() {
     let qc
 
     if (isAutomatic) {
-      qc = As * rad(phi) * a * Math.pow(tc, n - 1)
+      qc = As * phi * a * Math.pow(tc, n - 1) / 1000
       n = DP / DT
 
       T.length = n + 1    // +1 per lo zero in prima posizione
       Qp.length = n + 1
 
+      for (let i = 0; i < T.length; i++) {
+        T[i] = 0
+      }
+
       for (let i = 1; i < n + 1; i++) {
-        T[i] = T[i] + DT
+        T[i] = T[i - 1] + DT
 
         if (T[i] < tc) {
           Qp[i] = qc * T[i] / tc * Math.pow(2.71, (1 - T[i] / tc))
