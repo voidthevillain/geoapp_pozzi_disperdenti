@@ -149,11 +149,6 @@ export function saveFile() {
         inputs.forEach(e => {
           str += e.value + ';'
         })
-
-        for (let i = 1; i < table.rows.length; i++) {
-          str += table.rows[i].cells[0].innerText + ';'
-          str += table.rows[i].cells[1].innerText + ';'
-        }
       }
 
       let blob = new Blob([str], {
