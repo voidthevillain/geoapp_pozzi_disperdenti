@@ -32,7 +32,7 @@ export const input_n = document.querySelector('#n')
 const inputs = document.querySelectorAll('.input-value')
 
 // Outputs
-const output_hwmax = document.querySelector('#hwmax')
+export const output_hwmax = document.querySelector('#hwmax')
 
 // Table
 export const table = document.querySelector('#table')

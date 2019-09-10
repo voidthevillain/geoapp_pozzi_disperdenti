@@ -1,6 +1,6 @@
 import { Document, Packer, Paragraph, Table, TextRun, Media, HorizontalPositionAlign, VerticalPositionAlign, HorizontalPositionRelativeFrom, VerticalPositionRelativeFrom, TextWrappingSide, TextWrappingType, WidthType, ThematicBreak } from 'docx'
 import { logo_print, scheme1, formula1, scheme2, formula2, formula3, formula4, formula5, scheme3, formula6, formula7 } from './base64.util'
-import { input_k, input_d, input_np, input_as, input_phi, input_tc, input_dp, input_dt, input_a, input_n, table, hwmax } from './dom.util';
+import { input_k, input_d, input_np, input_as, input_phi, input_tc, input_dp, input_dt, input_a, input_n, table, hwmax, output_hwmax } from './dom.util';
 
 export function createDocument() {
   return (() => {
@@ -211,7 +211,7 @@ export function createDocument() {
     p_eq7.addImage(eq7)
     doc.addParagraph(p_eq7)
 
-    if (hwmax === undefined) {
+    if (output_hwmax.value === '') {
       const p10 = new Paragraph()
       const p10_1 = new TextRun('Non è stato effettuato il calcolo').bold().size(24).break()
       p10.addRun(p10_1)
@@ -281,12 +281,14 @@ export function createDocument() {
       p14.rightTabStop(7736)
       p14.leftTabStop(7936)
       const p14_1 = new TextRun('Area bacino').size(24)
-      const p14_2 = new TextRun('As').size(24).tab().tab().tab()
+      const p14_2 = new TextRun('A').size(24).tab().tab().tab()
+      const p14_2_1 = new TextRun('s').size(24).subScript()
       const p14_3 = new TextRun(input_as.value).bold().size(24).tab().tab()
       const p14_4 = new TextRun('m').size(24).tab()
       const p14_4_1 = new TextRun('2').size(24).superScript()
       p14.addRun(p14_1)
       p14.addRun(p14_2)
+      p14.addRun(p14_2_1)
       p14.addRun(p14_3)
       p14.addRun(p14_4)
       p14.addRun(p14_4_1)
@@ -317,11 +319,13 @@ export function createDocument() {
       p16.rightTabStop(7736)
       p16.leftTabStop(7936)
       const p16_1 = new TextRun('Tempo di corrivazione').size(24)
-      const p16_2 = new TextRun('tc').size(24).tab().tab().tab()
+      const p16_2 = new TextRun('t').size(24).tab().tab().tab()
+      const p16_2_1 = new TextRun('c').size(24).subScript()
       const p16_3 = new TextRun(input_tc.value).bold().size(24).tab().tab()
       const p16_4 = new TextRun('h').size(24).tab()
       p16.addRun(p16_1)
       p16.addRun(p16_2)
+      p16.addRun(p16_2_1)
       p16.addRun(p16_3)
       p16.addRun(p16_4)
       doc.addParagraph(p16)
@@ -334,7 +338,7 @@ export function createDocument() {
       p17.rightTabStop(7736)
       p17.leftTabStop(7936)
       const p17_1 = new TextRun('Durata pioggia').size(24)
-      const p17_2 = new TextRun('DP').size(24).tab().tab().tab()
+      const p17_2 = new TextRun('Δp').size(24).tab().tab().tab()
       const p17_3 = new TextRun(input_dp.value).bold().size(24).tab().tab()
       const p17_4 = new TextRun('h').size(24).tab()
       p17.addRun(p17_1)
@@ -351,7 +355,7 @@ export function createDocument() {
       p18.rightTabStop(7736)
       p18.leftTabStop(7936)
       const p18_1 = new TextRun('Passo integrazione').size(24)
-      const p18_2 = new TextRun('DT').size(24).tab().tab().tab()
+      const p18_2 = new TextRun('Δt').size(24).tab().tab().tab()
       const p18_3 = new TextRun(input_dt.value).bold().size(24).tab().tab()
       const p18_4 = new TextRun('h').size(24).tab()
       p18.addRun(p18_1)
@@ -399,49 +403,9 @@ export function createDocument() {
       doc.addParagraph(p20)
 
       const p_break = new Paragraph()
-      const p_run = new TextRun('').size(24).break().break().break()
+      const p_run = new TextRun('').size(24).break()
       p_break.addRun(p_run)
       doc.addParagraph(p_break)
-
-      const pTable = new Table({
-        rows: table.rows.length,
-        columns: 2,
-        width: 100,
-        widthUnitType: WidthType.PERCENTAGE
-      })
-      const pt1 = new Paragraph().center()
-      const pt1_1 = new TextRun('Tempo').bold().size(26)
-      const pt1_2 = new TextRun('[h]').bold().size(26).break()
-      pt1.addRun(pt1_1)
-      pt1.addRun(pt1_2)
-
-      const pt2 = new Paragraph().center()
-      const pt2_1 = new TextRun('Portata').bold().size(26)
-      const pt2_2 = new TextRun('[m').bold().size(26).break()
-      const pt2_2_1 = new TextRun('3').bold().size(26).superScript()
-      const pt2_2_2 = new TextRun('/h]').bold().size(26)
-      pt2.addRun(pt2_1)
-      pt2.addRun(pt2_2)
-      pt2.addRun(pt2_2_1)
-      pt2.addRun(pt2_2_2)
-
-      pTable.getRow(0).getCell(0).addParagraph(pt1.center())
-      pTable.getRow(0).getCell(1).addParagraph(pt2.center())
-
-      for (let i = 1; i < table.rows.length; i++) {
-        let pt3 = new Paragraph().center()
-        let pt3_1 = new TextRun('' + table.rows[i].cells[0].innerText).size(24)
-        pt3.addRun(pt3_1)
-        
-        let pt4 = new Paragraph().center()
-        let pt4_1 = new TextRun('' + table.rows[i].cells[1].innerText).size(24)
-        pt4.addRun(pt4_1)
-        
-        pTable.getRow(i).getCell(0).addParagraph(pt3.center())
-        pTable.getRow(i).getCell(1).addParagraph(pt4.center())
-      }
-
-      doc.addTable(pTable)
 
       const p21 = new Paragraph()
       const p21_1 = new TextRun('Risultati').bold().size(24).break().break()
@@ -456,14 +420,111 @@ export function createDocument() {
       p22.rightTabStop(7736)
       p22.leftTabStop(7936)
       const p22_1 = new TextRun('Altezza di progetto del pozzetto').size(24)
-      const p22_2 = new TextRun('hwmax').size(24).tab().tab().tab()
-      const p22_3 = new TextRun(hwmax.toFixed(2)).bold().size(24).tab().tab()
+      const p22_2 = new TextRun('h').size(24).tab().tab().tab()
+      const p22_2_1 = new TextRun('w').size(24).subScript()
+      const p22_3 = new TextRun(output_hwmax.value).bold().size(24).tab().tab()
       const p22_4 = new TextRun('m').size(24).tab()
       p22.addRun(p22_1)
       p22.addRun(p22_2)
+      p22.addRun(p22_2_1)
       p22.addRun(p22_3)
       p22.addRun(p22_4)
       doc.addParagraph(p22)
+
+      const p_break1 = new Paragraph()
+      const p_run1 = new TextRun('').size(24).break()
+      p_break1.addRun(p_run1)
+      doc.addParagraph(p_break1)
+
+      const pTable = new Table({
+        rows: table.rows.length,
+        columns: 5,
+        width: 100,
+        widthUnitType: WidthType.PERCENTAGE
+      })
+      const pt1 = new Paragraph().center()
+      const pt1_1 = new TextRun('t').bold().size(26)
+      const pt1_2 = new TextRun('[h]').bold().size(24).break()
+      pt1.addRun(pt1_1)
+      pt1.addRun(pt1_2)
+
+      const pt2 = new Paragraph().center()
+      const pt2_1 = new TextRun('Q').bold().size(26)
+      const pt2_1_1 = new TextRun('p').bold().size(26).subScript()
+      const pt2_2 = new TextRun('[m').bold().size(24).break()
+      const pt2_2_1 = new TextRun('3').bold().size(24).superScript()
+      const pt2_2_2 = new TextRun('/h]').bold().size(24)
+      pt2.addRun(pt2_1)
+      pt2.addRun(pt2_1_1)
+      pt2.addRun(pt2_2)
+      pt2.addRun(pt2_2_1)
+      pt2.addRun(pt2_2_2)
+
+      const pt3 = new Paragraph().center()
+      const pt3_1 = new TextRun('Q').bold().size(26)
+      const pt3_1_1 = new TextRun('f').bold().size(26).subScript()
+      const pt3_2 = new TextRun('[m').bold().size(24).break()
+      const pt3_2_1 = new TextRun('3').bold().size(24).superScript()
+      const pt3_2_2 = new TextRun('/h]').bold().size(24)
+      pt3.addRun(pt3_1)
+      pt3.addRun(pt3_1_1)
+      pt3.addRun(pt3_2)
+      pt3.addRun(pt3_2_1)
+      pt3.addRun(pt3_2_2)
+
+      const pt4 = new Paragraph().center()
+      const pt4_1 = new TextRun('ΔW').bold().size(26)
+      const pt4_2 = new TextRun('[m').bold().size(24).break()
+      const pt4_2_1 = new TextRun('3').bold().size(24).superScript()
+      const pt4_2_2 = new TextRun(']').bold().size(24)
+      pt4.addRun(pt4_1)
+      pt4.addRun(pt4_2)
+      pt4.addRun(pt4_2_1)
+      pt4.addRun(pt4_2_2)
+
+      const pt5 = new Paragraph().center()
+      const pt5_1 = new TextRun('h').bold().size(26)
+      const pt5_1_1 = new TextRun('w').bold().size(26).subScript()
+      const pt5_2 = new TextRun('[m]').bold().size(24).break()
+      pt5.addRun(pt5_1)
+      pt5.addRun(pt5_1_1)
+      pt5.addRun(pt5_2)
+
+      pTable.getRow(0).getCell(0).addParagraph(pt1.center())
+      pTable.getRow(0).getCell(1).addParagraph(pt2.center())
+      pTable.getRow(0).getCell(2).addParagraph(pt3.center())
+      pTable.getRow(0).getCell(3).addParagraph(pt4.center())
+      pTable.getRow(0).getCell(4).addParagraph(pt5.center())
+
+      for (let i = 1; i < table.rows.length; i++) {
+        let pt6 = new Paragraph().center()
+        let pt6_1 = new TextRun('' + table.rows[i].cells[0].innerText).size(24)
+        pt6.addRun(pt6_1)
+        
+        let pt7 = new Paragraph().center()
+        let pt7_1 = new TextRun('' + table.rows[i].cells[1].innerText).size(24)
+        pt7.addRun(pt7_1)
+
+        let pt8 = new Paragraph().center()
+        let pt8_1 = new TextRun('' + table.rows[i].cells[2].innerText).size(24)
+        pt8.addRun(pt8_1)
+
+        let pt9 = new Paragraph().center()
+        let pt9_1 = new TextRun('' + table.rows[i].cells[3].innerText).size(24)
+        pt9.addRun(pt9_1)
+
+        let pt10 = new Paragraph().center()
+        let pt10_1 = new TextRun('' + table.rows[i].cells[4].innerText).size(24)
+        pt10.addRun(pt10_1)
+        
+        pTable.getRow(i).getCell(0).addParagraph(pt6.center())
+        pTable.getRow(i).getCell(1).addParagraph(pt7.center())
+        pTable.getRow(i).getCell(2).addParagraph(pt8.center())
+        pTable.getRow(i).getCell(3).addParagraph(pt9.center())
+        pTable.getRow(i).getCell(4).addParagraph(pt10.center())
+      }
+
+      doc.addTable(pTable)
     }
 
     saveDocument(doc)
