@@ -117,20 +117,6 @@ function openFile(e) {
       for (let i = 0; i <= 9; i++) {
         inputs[i].value = arr[i]
       }
-
-      let n = (arr.length - 1) - 9
-      let p = 10
-      let arr_t = arr.splice(p, n)
-
-      let t_body = table.querySelector('tbody')
-      t_body.innerHTML = ``
-
-      for (let i = 1, j = 0, k = 1; i <= (arr_t.length / 2) && j <= arr_t.length - 1 && k <= arr_t.length; i++, j += 2, k += 2) {
-        t_body.innerHTML += `<tr class="text-center">
-          <td class="border-right" contenteditable="true">${arr_t[j]}</td>
-          <td contenteditable="true">${arr_t[k]}</td>
-        </tr>`
-      }
     }
   })(e)
 }
