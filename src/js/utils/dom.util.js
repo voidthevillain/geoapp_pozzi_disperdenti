@@ -80,10 +80,8 @@ export function newFile() {
   return (() => {
     inputs.forEach(e => e.value = '')
 
-    for (let i = 1; i < table.rows.length; i++) {
-      table.rows[i].cells[0].innerText = '-'
-      table.rows[i].cells[1].innerText = '-'
-    }
+    table.querySelector('thead').innerHTML = ``
+    table.querySelector('tbody').innerHTML = ``
 
     output_hwmax.value = ''
   })()
