@@ -1,6 +1,6 @@
 {
   "name": "geoapp_pozzi_disperdenti",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Geoapp - Pozzi Disperdenti",
   "main": "./js/main.js",
